@@ -1,0 +1,32 @@
+# 원본/전처리 데이터는 저장소에 포함하지 않는다 (CLAUDE.md §3, §13)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# 실험 결과물 (CSV, 그림) — 필요 시 개별적으로 git add
+results/*
+!results/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+build/
+dist/
+
+# 테스트/캐시
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# 노트북 체크포인트
+.ipynb_checkpoints/
+
+# OS
+.DS_Store

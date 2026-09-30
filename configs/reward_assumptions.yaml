@@ -1,0 +1,35 @@
+# 반합성 보상 계산에 쓰이는 가정 값 (CLAUDE.md §4, §6)
+#
+# r = y_click * y_conv * price(a) * commission_rate[cat(a)] * (1 - y_cancel)
+#
+# 이 파일의 값은 전부 자리표시자(placeholder)다. 실제 값은 비개발자 팀원이
+# 조사해서 채운다. 코드에서는 이 파일 외의 경로로 가격/수수료율/취소율을
+# 하드코딩하지 않는다 (CLAUDE.md §9).
+#
+# 카테고리(cat)는 제휴 상품 카테고리 식별자다. Open Bandit Dataset의 상품
+# 카테고리 체계에 맞춰 실제 값 확인 후 키를 채운다.
+
+version: 1  # 값이 바뀔 때마다 올린다. 결과 파일에 이 버전을 함께 기록한다.
+
+# 카테고리별 평균 단가 (원). TODO: 실제 조사 값으로 교체
+price:
+  # category_id: 평균 단가
+  TODO_CATEGORY_1: 0
+
+# 카테고리별 제휴 수수료율 (0~1). TODO: 실제 조사 값으로 교체
+commission_rate:
+  TODO_CATEGORY_1: 0.0
+
+# 카테고리별 취소율 (0~1). TODO: 실제 조사 값으로 교체
+cancel_rate:
+  TODO_CATEGORY_1: 0.0
+
+# 지연 전환 모델(Chapelle 2014) 관련 가정
+delayed_conversion:
+  attribution_window_days: 0  # TODO: 관측 기간(며칠 뒤 미확정 표본을 확정으로 간주할지)
+
+# 민감도 분석(CLAUDE.md §6-6)에 쓸 격자. 각 값의 상대적 배율(예: 0.5배~2배)
+sensitivity_grid:
+  price_multiplier: [1.0]      # TODO: 예) [0.5, 0.75, 1.0, 1.25, 1.5]
+  commission_rate_multiplier: [1.0]
+  cancel_rate_multiplier: [1.0]

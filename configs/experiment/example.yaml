@@ -1,0 +1,33 @@
+# 실험 설정 템플릿. 실제 실험은 이 파일을 복사해 configs/experiment/<실험명>.yaml로 만든다.
+# CLAUDE.md §9: 모든 실험은 설정 파일 + 시드로 재현 가능해야 한다.
+
+experiment_name: example
+
+data:
+  source: synthetic  # synthetic | open_bandit | criteo
+  # open_bandit 사용 시
+  behavior_policy: random  # random | bts
+  # 시간 기준 분할 경계 (CLAUDE.md §6-1). 데이터 성격에 맞게 채운다.
+  split:
+    train_end: null  # TODO: 학습 기간 종료 시점
+    eval_start: null # TODO: 평가 기간 시작 시점 (train_end 이후여야 함)
+
+reward_assumptions_path: configs/reward_assumptions.yaml
+
+policies:
+  - random
+  - logging
+  - greedy
+  - epsilon_greedy
+  - linucb
+  - neural_linear_ts
+  - delay_cancel_ts        # 제안 방법
+  - delay_cancel_ts_no_delay   # 제거 실험: 지연 보정만 제거
+  - delay_cancel_ts_no_cancel  # 제거 실험: 취소 보정만 제거
+
+evaluation:
+  ope_estimators: [ips, snips, dr]
+  bootstrap_resamples: 1000
+  confidence_level: 0.95
+
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]  # CLAUDE.md §6-7: 10개 이상
