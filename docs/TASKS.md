@@ -18,7 +18,12 @@ CLAUDE.md §10 로드맵을 실행 단위로 분해한 목록이다. Phase 순�
       `uv lock`으로 `uv.lock` 생성, `uv sync`로 `.venv` 설치까지 확인함.
 - [x] **T0.2** 저장소 디렉토리 스캐폴드 (`src/cocoa/*`, `configs/`, `data/`,
       `scripts/`, `notebooks/`, `results/`, `tests/`, `docs/`)
-- [ ] **T0.3** `utils/seed.py`, `utils/logging.py`, `utils/config.py` 기본 유틸 구현
+- [x] **T0.3** `utils/seed.py`, `utils/logging.py`, `utils/config.py` 기본 유틸 구현.
+      `seed.py`는 `set_seed()`(random/numpy/torch 전역 고정)와 `get_rng()`(독립
+      Generator, 다중 시드 실험용)를 제공. `logging.py`는 `get_logger()`로 포맷
+      통일. `config.py`는 `load_yaml()`, `get_git_commit_hash()`,
+      `save_run_metadata()`(설정+시드+git hash를 결과 옆 JSON으로 저장)를 제공.
+      `tests/test_utils.py` 8개 테스트 모두 통과.
 - [ ] **T0.4** `data/raw/`에 Open Bandit Dataset, Criteo 원본을 받는 절차 정리
       (`scripts/download_data.py` 또는 README에 수동 절차 기록)
 
