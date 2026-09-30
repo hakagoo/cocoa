@@ -6,8 +6,16 @@ CLAUDE.md §10 로드맵을 실행 단위로 분해한 목록이다. Phase 순�
 
 ## Phase 0 — 프로젝트 셋업
 
-- [ ] **T0.1** `pyproject.toml` 의존성 버전 확정. `obp` 설치 가능한 Python 버전을
-      실제로 설치해 확인(현재 스캐폴드는 `>=3.9,<3.11`로 임시 지정, 검증 전).
+- [x] **T0.1** `pyproject.toml` 의존성 버전 확정. `obp` 설치 가능한 Python 버전을
+      실제로 설치해 확인. 결과: obp 0.5.x는 `torch==1.12.0`에 하드 고정되어 있어
+      Python 3.11+에서는 설치 불가(휠 없음) → 버전 미지정 시 resolver가 자동으로
+      `obp==0.4.1`을 선택함. 0.4.1은 하한만 있는 느슨한 의존성이라 numpy 2.x /
+      pandas 3.x / scikit-learn 1.9 / torch 2.14와 함께 Python 3.11·3.13·3.14에서
+      설치 및 기능 스모크테스트(SyntheticBanditDataset, Random 정책, IPS/SNIPS/DR,
+      RegressionModel) 모두 통과. 3.9/3.10은 네트워크 제약으로 이번 검증 환경에서
+      인터프리터를 새로 받을 수 없어 미검증(필요 시 별도 확인).
+      → `requires-python = ">=3.11"`, `obp>=0.4.1,<0.5`로 고정하고
+      `uv lock`으로 `uv.lock` 생성, `uv sync`로 `.venv` 설치까지 확인함.
 - [x] **T0.2** 저장소 디렉토리 스캐폴드 (`src/cocoa/*`, `configs/`, `data/`,
       `scripts/`, `notebooks/`, `results/`, `tests/`, `docs/`)
 - [ ] **T0.3** `utils/seed.py`, `utils/logging.py`, `utils/config.py` 기본 유틸 구현
