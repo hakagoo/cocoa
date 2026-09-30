@@ -24,8 +24,15 @@ CLAUDE.md §10 로드맵을 실행 단위로 분해한 목록이다. Phase 순�
       통일. `config.py`는 `load_yaml()`, `get_git_commit_hash()`,
       `save_run_metadata()`(설정+시드+git hash를 결과 옆 JSON으로 저장)를 제공.
       `tests/test_utils.py` 8개 테스트 모두 통과.
-- [ ] **T0.4** `data/raw/`에 Open Bandit Dataset, Criteo 원본을 받는 절차 정리
-      (`scripts/download_data.py` 또는 README에 수동 절차 기록)
+- [x] **T0.4** `data/raw/`에 Open Bandit Dataset, Criteo 원본을 받는 절차 정리.
+      `scripts/download_data.py`(Open Bandit은 공식 zip 자동 다운로드+정리,
+      Criteo는 공식 링크가 현재 404라 수동 절차 안내만 출력)와 `docs/DATA.md`
+      작성. Open Bandit Dataset은 실제로 내려받아 구조·컬럼·item_id 범위를
+      전부 파일 기준으로 검증함 — 그 과정에서 **CLAUDE.md §2의 "position 0,
+      1, 2" 가정이 실제 데이터(1, 2, 3)와 다르다는 것을 확인**(docs/DATA.md
+      "문서-실제 불일치" 절 참고, 사용자 확인 대기 중). Criteo는 공식 다운로드
+      링크가 죽어 있어 컬럼 스키마를 아직 실제 파일로 검증하지 못함 —
+      T1.2 전에 반드시 재확인 필요.
 
 의존성: 없음 (최초 단계)
 
