@@ -78,10 +78,9 @@ user-item_affinity_0 ... user-item_affinity_{N-1}
    propensity 컬럼을 `action_prob`이라 적고 있지만, **실제 전체 데이터의
    컬럼명은 `propensity_score`다.** 샘플용 문서를 참고하지 말 것.
 3. **`position` 값은 실제로 1, 2, 3이다 (좌/중/우).** 두 개 캠페인 파일에서
-   `cut -d',' -f4 ... | sort -u`로 직접 확인. **CLAUDE.md §2는 "position 0,
-   1, 2"라고 적어 두었는데 실제 데이터와 다르다** — `action_context.py`
-   구현(T1.4) 시 1/2/3 기준으로 짜야 하고, CLAUDE.md 쪽 표기도 정정이
-   필요해 보인다(사용자 확인 필요).
+   `cut -d',' -f4 ... | sort -u`로 직접 확인. CLAUDE.md §2는 원래 "position 0,
+   1, 2"로 적혀 있었으나 이 검증 결과에 맞춰 **1, 2, 3으로 정정했다**(2026-09-30).
+   `action_context.py`(T1.4)도 1/2/3 기준으로 구현할 것.
 4. README는 "user feature 0-4"(5개로 읽힐 수 있는 표현)라고 적었지만 실제
    컬럼은 `user_feature_0`~`_3`, 4개뿐이다.
 
@@ -139,6 +138,5 @@ user-item_affinity_0 ... user-item_affinity_{N-1}
 
 - [ ] Criteo 공식 페이지에서 현재 유효한 다운로드 링크 확인 후 수동으로 받기
 - [ ] Criteo 실제 파일을 열어 위 컬럼 스키마 표를 검증·갱신
-- [ ] CLAUDE.md §2의 "position 0, 1, 2" 표기를 실제 값(1, 2, 3)에 맞게
-      정정할지 사용자와 확인
+- [x] CLAUDE.md §2의 position 표기를 실제 값(1, 2, 3)에 맞게 정정 (2026-09-30)
 - [ ] Phase 1(T1.1, T1.2)에서 이 문서의 구조를 바탕으로 실제 로더 구현

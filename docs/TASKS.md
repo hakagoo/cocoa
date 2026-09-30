@@ -28,9 +28,9 @@ CLAUDE.md §10 로드맵을 실행 단위로 분해한 목록이다. Phase 순�
       `scripts/download_data.py`(Open Bandit은 공식 zip 자동 다운로드+정리,
       Criteo는 공식 링크가 현재 404라 수동 절차 안내만 출력)와 `docs/DATA.md`
       작성. Open Bandit Dataset은 실제로 내려받아 구조·컬럼·item_id 범위를
-      전부 파일 기준으로 검증함 — 그 과정에서 **CLAUDE.md §2의 "position 0,
-      1, 2" 가정이 실제 데이터(1, 2, 3)와 다르다는 것을 확인**(docs/DATA.md
-      "문서-실제 불일치" 절 참고, 사용자 확인 대기 중). Criteo는 공식 다운로드
+      전부 파일 기준으로 검증함 — 그 과정에서 CLAUDE.md §2의 position 가정이
+      실제 데이터와 달랐던 것을 발견해 **CLAUDE.md §2를 1/2/3으로 정정함**
+      (docs/DATA.md "문서-실제 불일치" 절 참고). Criteo는 공식 다운로드
       링크가 죽어 있어 컬럼 스키마를 아직 실제 파일로 검증하지 못함 —
       T1.2 전에 반드시 재확인 필요.
 
@@ -44,7 +44,7 @@ CLAUDE.md §10 로드맵을 실행 단위로 분해한 목록이다. Phase 순�
       **실제 다운로드한 CSV를 열어 컬럼명 확인 후 구현** (추측 금지, CLAUDE.md §3)
 - [ ] **T1.3** 시간 기준 분할 (`data/time_split.py`): train/eval 경계 함수 +
       "eval 기간 데이터가 학습에 안 섞였는지" 검증 유틸
-- [ ] **T1.4** 행동·맥락 정의 (`data/action_context.py`): (제휴 상품, position 0/1/2)
+- [ ] **T1.4** 행동·맥락 정의 (`data/action_context.py`): (제휴 상품, position 1/2/3)
       행동 스키마, 맥락 벡터 구성
 - [ ] **T1.5 (테스트)** `tests/test_time_split.py` — 경계값, 누수 여부
 
