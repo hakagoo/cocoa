@@ -12,8 +12,10 @@ Contextual Bandit 에이전트다. 보상은 수일 뒤 확정되고 일부는 �
 ## 2. 연구 범위 (반드시 지킬 것)
 
 포함:
-- 행동(action): (제휴 상품, 노출 위치) 조합. 위치는 3개(좌·중·우 = Open Bandit Dataset의 position 1, 2, 3.
-  실제 다운로드한 데이터 파일로 검증한 값이며, 0 시작이 아니라 1 시작이다 — 2026-09-30 확인, docs/DATA.md 참고)
+- 행동(action): (제휴 상품, 노출 위치) 조합. 위치는 3개(좌·중·우 = Open Bandit Dataset의 position 0, 1, 2.
+  원본 CSV의 position 컬럼값 자체는 1/2/3이지만, `obp.dataset.OpenBanditDataset`으로
+  로드하면 `rankdata(...) - 1`로 0-인덱스로 자동 정규화된다 — obp 소스와 실제 데이터로
+  확인, docs/DATA.md 참고)
 - 문제 형태: 노출 단위 Contextual Bandit (선택이 다음 상태를 바꾸지 않는다고 가정)
 - 보상: 지연·취소되는 반합성(semi-synthetic) 금전 보상
 - 제안 방법: 지연·취소 보정 Neural-Linear Thompson Sampling

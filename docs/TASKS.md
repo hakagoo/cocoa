@@ -44,8 +44,8 @@ CLAUDE.md §10 로드맵을 실행 단위로 분해한 목록이다. Phase 순�
       **실제 다운로드한 CSV를 열어 컬럼명 확인 후 구현** (추측 금지, CLAUDE.md §3)
 - [ ] **T1.3** 시간 기준 분할 (`data/time_split.py`): train/eval 경계 함수 +
       "eval 기간 데이터가 학습에 안 섞였는지" 검증 유틸
-- [ ] **T1.4** 행동·맥락 정의 (`data/action_context.py`): (제휴 상품, position 1/2/3)
-      행동 스키마, 맥락 벡터 구성
+- [ ] **T1.4** 행동·맥락 정의 (`data/action_context.py`): (제휴 상품, position 0/1/2 —
+      obp 로더가 정규화한 값) 행동 스키마, 맥락 벡터 구성
 - [ ] **T1.5 (테스트)** `tests/test_time_split.py` — 경계값, 누수 여부
 
 의존성: T0.3 (설정/로깅 유틸)

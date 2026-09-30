@@ -72,10 +72,10 @@ synthetic_env.py               직접 투입되는 보상 신호
 ### `src/cocoa/data/` — 데이터 로더·시간 분할
 | 파일 | 책임 |
 | --- | --- |
-| `open_bandit_loader.py` | `obp`로 Open Bandit Dataset 로드. behavior_policy(`random`/`bts`) 선택, position(1/2/3, 실제 데이터 검증값) 유지 |
+| `open_bandit_loader.py` | `obp`로 Open Bandit Dataset 로드. behavior_policy(`random`/`bts`) 선택. obp가 원본 position(1/2/3)을 0-인덱스(0/1/2)로 자동 정규화함 |
 | `criteo_loader.py` | Criteo Attribution 원본 CSV 로드. 컬럼명은 실제 파일 확인 후 상수화 (추측 금지, CLAUDE.md §3) |
 | `time_split.py` | 시간 기준 train/eval 분할. eval 시작 시점 이전 데이터만 학습에 노출되는지 검증하는 로직 포함 |
-| `action_context.py` | (제휴 상품, 노출 위치) 행동 정의와 맥락 벡터 구성. position 1/2/3 ↔ 좌/중/우 대응표 |
+| `action_context.py` | (제휴 상품, 노출 위치) 행동 정의와 맥락 벡터 구성. position 0/1/2 ↔ 좌/중/우 대응표 |
 
 ### `src/cocoa/reward/` — 반합성 보상·지연 전환
 | 파일 | 책임 |
@@ -126,7 +126,7 @@ TS 계열은 사후 샘플링을 K회 반복한 몬테카를로로 propensity를
 # src/cocoa/policies/base.py
 class Action(NamedTuple):
     item_id: str
-    position: int  # 1, 2, 3 (Open Bandit Dataset 실제 값, 좌/중/우)
+    position: int  # 0, 1, 2 (obp가 원본 CSV의 1/2/3을 0-인덱스로 정규화한 값)
 
 class Feedback(NamedTuple):
     context: np.ndarray

@@ -77,10 +77,17 @@ user-item_affinity_0 ... user-item_affinity_{N-1}
 2. GitHub `obp` 저장소의 `obd/README.md`(작은 샘플 데이터용 문서)는
    propensity 컬럼을 `action_prob`이라 적고 있지만, **실제 전체 데이터의
    컬럼명은 `propensity_score`다.** 샘플용 문서를 참고하지 말 것.
-3. **`position` 값은 실제로 1, 2, 3이다 (좌/중/우).** 두 개 캠페인 파일에서
-   `cut -d',' -f4 ... | sort -u`로 직접 확인. CLAUDE.md §2는 원래 "position 0,
-   1, 2"로 적혀 있었으나 이 검증 결과에 맞춰 **1, 2, 3으로 정정했다**(2026-09-30).
-   `action_context.py`(T1.4)도 1/2/3 기준으로 구현할 것.
+3. **원본 CSV의 `position` 컬럼값은 1, 2, 3이다 (좌/중/우)** — 두 캠페인
+   파일에서 `cut -d',' -f4 ... | sort -u`로 직접 확인. 처음엔 이걸 근거로
+   CLAUDE.md §2를 "position 1/2/3"으로 고쳤었는데, 그건 **틀린 정정이었다.**
+   `obp.dataset.OpenBanditDataset.load_raw_data()`(obp/dataset/real.py:171)가
+   `rankdata(data["position"], "dense") - 1`로 원본 1/2/3을 **자동으로 0/1/2로
+   정규화**한다 — 실제로 obp로 로드해서 재확인함(2026-09-30). CLAUDE.md §3이
+   "obp 패키지로 로드"를 명시하므로, 파이프라인이 실제로 다루는 값은 obp를 거친
+   **0/1/2가 맞고, CLAUDE.md §2의 원래 표기가 옳았다.** 최종적으로 CLAUDE.md §2는
+   0/1/2로 되돌리되 이 정규화 사실을 각주로 남겼다. `open_bandit_loader.py`(T1.1)를
+   obp가 아닌 다른 경로로 원본 CSV를 직접 읽는 방식으로 바꾼다면 이 변환이
+   없다는 것을 잊지 말 것.
 4. README는 "user feature 0-4"(5개로 읽힐 수 있는 표현)라고 적었지만 실제
    컬럼은 `user_feature_0`~`_3`, 4개뿐이다.
 
@@ -138,5 +145,6 @@ user-item_affinity_0 ... user-item_affinity_{N-1}
 
 - [ ] Criteo 공식 페이지에서 현재 유효한 다운로드 링크 확인 후 수동으로 받기
 - [ ] Criteo 실제 파일을 열어 위 컬럼 스키마 표를 검증·갱신
-- [x] CLAUDE.md §2의 position 표기를 실제 값(1, 2, 3)에 맞게 정정 (2026-09-30)
+- [x] CLAUDE.md §2의 position 표기 검증 — obp 로더가 원본 1/2/3을 0/1/2로
+      정규화함을 실제로 확인, CLAUDE.md §2는 0/1/2 그대로 유지 (2026-09-30)
 - [ ] Phase 1(T1.1, T1.2)에서 이 문서의 구조를 바탕으로 실제 로더 구현
